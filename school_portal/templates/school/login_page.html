@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>School Portal | Log In</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static "plugins/fontawesome-free/css/all.min.css" %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static "plugins/icheck-bootstrap/icheck-bootstrap.min.css" %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static "dist/css/adminlte.min.css" %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href=""><img src="{% static "dist/img/logo.png" %}" width="60" height="60"><b>  School Portal</b></a>
+      </div>
+      <!-- /.login-logo -->
+      <div class="card">
+        <div class="card-body login-card-body">
+          <p class="login-box-msg">Sign in to your account</p>
+    
+          <form action="/doLogin" method="post" id="demo-form">
+          {% csrf_token %}
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="SpringLeaf ID" name="school_id">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Password" name="password" id="password">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-eye" style="cursor: pointer; color: #7a797e" id="eye" onclick="toggle()"></span>
+                </div>
+              </div>
+            </div>
+          
+            <div class="row">
+              <!-- /.col -->
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block" >Sign In</button>
+              </div><!-- /.col -->
+            </div>
+            <div class="row">
+              {% if messages %}
+             <div class="col-12">
+                {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top:10px">{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top:10px">{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+          </form>
+    
+          <!-- /.social-auth-links -->
+    
+        </div>
+        <!-- /.login-card-body -->
+      </div>
+    </div>
+    <!-- /.login-box -->
+    
+    <!-- jQuery -->
+    <script src="{% static "plugins/jquery/jquery.min.js" %}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static "plugins/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static "dist/js/adminlte.min.js" %}"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+      var state = false;
+      function toggle(){
+        if(state){
+          document.getElementById("password").setAttribute("type","password");
+          document.getElementById("eye").style.color='#7a797e';
+          state = false;
+        }
+        else{
+          document.getElementById("password").setAttribute("type","text");
+          document.getElementById("eye").style.color='#5887ef';
+          state = true;
+        }
+      }
+    </script>
+    
+    </body>
+    </html>
+    
